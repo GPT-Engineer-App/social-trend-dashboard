@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Box, Heading, Text, Flex, Image, Spinner, Tabs, TabList, TabPanels, Tab, TabPanel, Badge, Select } from "@chakra-ui/react";
 import { FaReddit, FaYoutube, FaTwitter } from "react-icons/fa";
+import AllPlatformsPanel from "./AllPlatformsPanel";
 
 const FilterMenu = ({ platform, selectedFilter, onFilterChange }) => {
   const filterOptions = {
@@ -79,6 +80,7 @@ const Index = () => {
             <Tab>
               <FaTwitter /> Twitter
             </Tab>
+            <Tab>All Platforms</Tab>
           </TabList>
           <TabPanels>
             <TabPanel>
@@ -122,6 +124,9 @@ const Index = () => {
                   </Box>
                 </Flex>
               ))}
+            </TabPanel>
+            <TabPanel>
+              <AllPlatformsPanel allPlatformsData={[...redditData, ...youtubeData, ...twitterData]} />
             </TabPanel>
           </TabPanels>
         </Tabs>
