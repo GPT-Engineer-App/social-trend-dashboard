@@ -69,67 +69,79 @@ const Index = () => {
           <Spinner size="xl" />
         </Flex>
       ) : (
-        <Tabs>
-          <TabList>
-            <Tab>
-              <FaReddit /> Reddit
-            </Tab>
-            <Tab>
-              <FaYoutube /> YouTube
-            </Tab>
-            <Tab>
-              <FaTwitter /> Twitter
-            </Tab>
-            <Tab>All Platforms</Tab>
-          </TabList>
-          <TabPanels>
-            <TabPanel>
-              {redditData.map((post) => (
-                <Flex key={post.id} mb={4} alignItems="center">
-                  <Image src={post.thumbnail} alt="Thumbnail" boxSize="100px" objectFit="cover" mr={4} />
-                  <Box>
-                    <Heading as="h3" size="md">
-                      {post.title}
-                    </Heading>
-                    <Text>Score: {post.score}</Text>
-                    <Badge colorScheme="purple">{getTrendRating(post.score)}</Badge>
-                  </Box>
-                </Flex>
-              ))}
-            </TabPanel>
-            <TabPanel>
-              {youtubeData.map((video) => (
-                <Flex key={video.id} mb={4} alignItems="center">
-                  <Image src={video.thumbnail} alt="Thumbnail" boxSize="100px" objectFit="cover" mr={4} />
-                  <Box>
-                    <Heading as="h3" size="md">
-                      {video.title}
-                    </Heading>
-                    <Text>Views: {video.views}</Text>
-                    <Badge colorScheme="red">{getTrendRating(video.views)}</Badge>
-                  </Box>
-                </Flex>
-              ))}
-            </TabPanel>
-            <TabPanel>
-              {twitterData.map((tweet) => (
-                <Flex key={tweet.id} mb={4} alignItems="center">
-                  <Image src={tweet.thumbnail} alt="Thumbnail" boxSize="100px" objectFit="cover" mr={4} />
-                  <Box>
-                    <Heading as="h3" size="md">
-                      {tweet.title}
-                    </Heading>
-                    <Text>Likes: {tweet.likes}</Text>
-                    <Badge colorScheme="blue">{getTrendRating(tweet.likes)}</Badge>
-                  </Box>
-                </Flex>
-              ))}
-            </TabPanel>
-            <TabPanel>
-              <AllPlatformsPanel allPlatformsData={[...redditData, ...youtubeData, ...twitterData]} />
-            </TabPanel>
-          </TabPanels>
-        </Tabs>
+        <Flex>
+          <Box w="300px" mr={8}>
+            <Heading as="h2" size="lg" mb={4}>
+              Filters
+            </Heading>
+            <FilterMenu platform="reddit" selectedFilter={redditFilter} onFilterChange={(e) => setRedditFilter(e.target.value)} />
+            <FilterMenu platform="youtube" selectedFilter={youtubeFilter} onFilterChange={(e) => setYoutubeFilter(e.target.value)} />
+            <FilterMenu platform="twitter" selectedFilter={twitterFilter} onFilterChange={(e) => setTwitterFilter(e.target.value)} />
+          </Box>
+          <Box flex={1}>
+            <Tabs>
+              <TabList>
+                <Tab>
+                  <FaReddit /> Reddit
+                </Tab>
+                <Tab>
+                  <FaYoutube /> YouTube
+                </Tab>
+                <Tab>
+                  <FaTwitter /> Twitter
+                </Tab>
+                <Tab>All Platforms</Tab>
+              </TabList>
+              <TabPanels>
+                <TabPanel>
+                  {redditData.map((post) => (
+                    <Flex key={post.id} mb={4} alignItems="center">
+                      <Image src={post.thumbnail} alt="Thumbnail" boxSize="100px" objectFit="cover" mr={4} />
+                      <Box>
+                        <Heading as="h3" size="md">
+                          {post.title}
+                        </Heading>
+                        <Text>Score: {post.score}</Text>
+                        <Badge colorScheme="purple">{getTrendRating(post.score)}</Badge>
+                      </Box>
+                    </Flex>
+                  ))}
+                </TabPanel>
+                <TabPanel>
+                  {youtubeData.map((video) => (
+                    <Flex key={video.id} mb={4} alignItems="center">
+                      <Image src={video.thumbnail} alt="Thumbnail" boxSize="100px" objectFit="cover" mr={4} />
+                      <Box>
+                        <Heading as="h3" size="md">
+                          {video.title}
+                        </Heading>
+                        <Text>Views: {video.views}</Text>
+                        <Badge colorScheme="red">{getTrendRating(video.views)}</Badge>
+                      </Box>
+                    </Flex>
+                  ))}
+                </TabPanel>
+                <TabPanel>
+                  {twitterData.map((tweet) => (
+                    <Flex key={tweet.id} mb={4} alignItems="center">
+                      <Image src={tweet.thumbnail} alt="Thumbnail" boxSize="100px" objectFit="cover" mr={4} />
+                      <Box>
+                        <Heading as="h3" size="md">
+                          {tweet.title}
+                        </Heading>
+                        <Text>Likes: {tweet.likes}</Text>
+                        <Badge colorScheme="blue">{getTrendRating(tweet.likes)}</Badge>
+                      </Box>
+                    </Flex>
+                  ))}
+                </TabPanel>
+                <TabPanel>
+                  <AllPlatformsPanel allPlatformsData={[...redditData, ...youtubeData, ...twitterData]} />
+                </TabPanel>
+              </TabPanels>
+            </Tabs>
+          </Box>
+        </Flex>
       )}
     </Box>
   );
